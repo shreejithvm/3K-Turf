@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: turf-project
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn Turf_Booking.wsgi:application"
