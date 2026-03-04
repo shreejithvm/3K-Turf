@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Admin Login</title>
+
+    <style>
+        body {
+            background: #f5f6fa;
+        }
+        .login-card {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 80px;
+            border-radius: 15px;
+        }
+        .login-header {
+            background:green;
+            padding: 20px;
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        button {
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card shadow login-card">
+    <div class="login-header text-center">
+        <h3>Admin Login</h3>
+    </div>
+
+    <div class="card-body">
+        <form method="POST">
+            {% csrf_token %}
+            
+    <div class="mb-3">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+    </div>
+
+            <div class="mb-3">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-2">Login</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

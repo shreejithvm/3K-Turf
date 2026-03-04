@@ -1,0 +1,14 @@
+{% extends 'adminapp/base_admin.html' %}
+<h2>Admin Dashboard</h2>
+
+<div class="mt-4">
+  <p>Total Turfs: {{ turf_count }}</p>
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-info">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+
+  <a href="{% url 'admin_turf_list' %}" class="btn btn-primary">Manage Turfs</a>
+  <a href="{% url 'booking_list' %}" class="btn btn-secondary">View Bookings</a>
+</div>

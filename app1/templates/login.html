@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: url("https://i.pinimg.com/1200x/44/24/62/44246235fc68567de2d96e63b642d6c6.jpg") 
+                  no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+
+    .auth-card {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 25px rgba(0, 128, 0, 0.25);
+      width: 100%;
+      max-width: 450px;
+      border: 2px solid #3dbb52;
+    }
+
+    .form-control {
+      border-radius: 10px;
+      padding: 10px 15px;
+      font-size: 15px;
+      border: 1.5px solid #3dbb52;
+    }
+
+    .form-control:focus {
+      border-color: #3aff4c;
+      box-shadow: 0 0 6px rgba(38, 255, 0, 0.6);
+    }
+
+    .btn-sport {
+      background: linear-gradient(135deg, #0a8f2f, #4df76c);
+      border: none;
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 600;
+      width: 100%;
+      color: white;
+    }
+
+    .btn-sport:hover {
+      opacity: 0.9;
+    }
+
+    .title-sport {
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #087427;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card">
+    <h3 class="title-sport">Login</h3>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-success">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% for err in form.username.errors %}
+          <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold text-success">{{ form.password.label }}</label>
+        {{ form.password }}
+        {% for err in form.password.errors %}
+          <div class="text-danger small">{{ err }}</div>
+        {% endfor %}
+      </div>
+
+      <button class="btn btn-sport mt-2">Login</button>
+
+      <div class="text-center mt-3">
+        <a href="{% url 'register' %}" class="text-decoration-none fw-semibold text-success">
+          Don't have an account? Register<br>
+        <a href="{% url 'password_reset' %}" class="text-decoration-none fw-semibold text-success">
+          Forget Password?
+
+        </a>
+      </div>
+    </form>
+
+  </div>
+</body>
+</html>

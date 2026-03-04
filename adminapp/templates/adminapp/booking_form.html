@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #eef1f5;
+        }
+
+        .update-card {
+            max-width: 450px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #34495e;
+        }
+
+        .btn {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="update-card">
+    <h2>Update Booking</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="d-flex justify-content-between mt-3">
+            <button type="submit" class="btn btn-success px-4">Save</button>
+            <a href="{% url 'booking_list' %}" class="btn btn-secondary px-4">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const startField = document.querySelector('#id_start_time');
+    const endField = document.querySelector('#id_end_time');
+
+    startField.addEventListener('change', function () {
+        const start = startField.value;
+        if (start) {
+            let [hour, minute] = start.split(':').map(Number);
+            hour = (hour + 1) % 24;
+            endField.value = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+        }
+    });
+});
+</script>
+
+</body>
+</html>

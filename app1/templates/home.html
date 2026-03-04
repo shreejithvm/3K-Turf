@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block title %}Home - TurfFinder{% endblock %}
+
+{% block content %}
+<div class="hero mb-4 fade-up" >
+  <div class="d-flex justify-content-between align-items-center flex-wrap">
+    <div>
+      <h1 class="h3 mb-1">Find & Book Turfs in your District</h1>
+      <p class="mb-0 text-muted">Cricket • Football • Badminton — quick availability & secure booking</p>
+    </div>
+    <div class="mt-2 mt-sm-0">
+      <!-- <a href="#" class="btn btn-primary btn-sm shadow-sm"><i class="bi bi-play-circle-fill me-1"></i>How it works</a> -->
+    </div>
+  </div>
+</div>
+
+<div class="row g-3" >
+  {% for turf in turfs %}
+    <div class="col-md-4 col-sm-6">
+      <div class="card h-100 position-relative fade-up" style="background: linear-gradient(135deg, #3cec21, white)" ;>
+        <!-- ribbon -->
+        <div class="ribbon">
+          <i class="bi bi-clipboard2-data me-1" style="font-size:.9rem;"></i>
+          {{ turf.sport }}
+        </div>
+
+        {% if turf.image %}
+          <img src="{{ turf.image.url }}" class="card-img-top" alt="{{ turf.name }}" loading="lazy">
+        {% else %}
+          <div class="img-skeleton card-img-top" role="img" aria-label="No image available"></div>
+        {% endif %}
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title mb-1">{{ turf.name }}</h5>
+          <p class="mb-1 small text-muted"><i class="bi bi-geo-alt-fill me-1" style="font-size:.9rem"></i>{{ turf.district }}</p>
+
+          <p class="card-text text-muted mb-3">{{ turf.description|truncatewords:18 }}</p>
+
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <a href="{% url 'turf_detail' turf.pk %}" class="btn btn-outline-primary btn-sm">View</a>
+            <div class="d-flex align-items-center gap-2">
+              <span class="price">₹ {{ turf.price_per_hour }}</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info">No turfs found for selected filters. Try clearing filters.</div>
+    </div>
+  {% endfor %}
+</div>
+
+
+<div class="container my-5" id="faq">
+    <h2 class="mb-4 text-center">Frequently Asked Questions</h2>
+
+    <div class="accordion" id="faqAccordion">
+
+        <!-- FAQ 1 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq1">
+                    What is Turf Booking?
+                </button>
+            </h2>
+            <div id="faq1" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Turf booking allows users to reserve a turf for playing different category sports as their wish.
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq2">
+                    How do I cancel a booking?
+                </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Please note that bookings cannot be canceled once confirmed.  If a player fails to show up after booking, their name may be added to our blacklist, which could restrict future bookings.
+We kindly ask that you book only if you're certain you can attend. Thank you for your understanding and cooperation.
+
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq2">
+                    How do I make payment?
+                </button>
+            </h2>
+            <div id="faq2" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+Currently, turf bookings are paid on-site. We do not offer online payment options at this time. Once your booking is confirmed, you will receive a notification via email.
+Thank you for choosing our turf!
+
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#faq3">
+                    Do I need to log in to book a turf?
+                </button>
+            </h2>
+            <div id="faq3" class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Yes, login is required to confirm your turf booking.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}
